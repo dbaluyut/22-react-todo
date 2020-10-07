@@ -1,10 +1,12 @@
 // 1. imports
-import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
+import { useSelector, useDispatch } from "react-redux"
+import axios from "axios"
 
 // 2. action definitions
-const EXAMPLE_SYNC = 'example/EXAMPLE_SYNC'
-const EXAMPLE_ASYNC = 'example/EXAMPLE_ASYNC'
+const EXAMPLE_SYNC = "example/EXAMPLE_SYNC"
+const EXAMPLE_ASYNC = "example/EXAMPLE_ASYNC"
+
+const ADD_TODO = "todo/ADD_TODO"
 
 // 3. initial state
 const initialState = {
@@ -43,7 +45,7 @@ function doExample(text) {
 function doExampleAsync() {
   return (dispatch) => {
     setTimeout(() => {
-      dispatch({ type: EXAMPLE_ASYNC, payload: ['foo', 'bar', 'baz'] })
+      dispatch({ type: EXAMPLE_ASYNC, payload: ["foo", "bar", "baz"] })
     }, 5000)
   }
 }
