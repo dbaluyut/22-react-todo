@@ -16,9 +16,11 @@ h1 {
 .todo-container {
   width: 600px;
   height: auto;
-  background-color: lightgrey;
+  background-color: #e3ffff;
   margin: 0 auto;
   padding: auto;
+  display: flex;
+  justify-content: space-between;
   /* justify-content: center; */
 }
 
@@ -33,17 +35,27 @@ h1 {
   display: flex;
   align-items: center;
   font-size: 1.5rem;
-  background-color: white;
+  background-color: #e3ffff;
   width: 601px;
 }
 
-.checkbox {
+.completebox {
   height: 20px;
   width: 20px;
-  border: 1px solid red;
-  margin: 2rem;
+  margin: 1rem;
+  background-color: #e3ffff;
+  border: 1px solid lightgrey;
+  border-radius: 50%;
 }
 
+.deletebox {
+  height: 20px;
+  width: 20px;
+  margin: 1rem;
+  color: lightgrey;
+  background-color: #e3ffff;
+  border: none;
+}
 .todo-list {
   width: 600px;
   height: auto;
@@ -78,8 +90,33 @@ input {
   padding: 0 20px;
   /* padding-left: 1rem; */
   border-bottom: 1px solid lightgrey;
+  background-color: #e3ffff;
 }
 
 input::placeholder {
   font-style: italic;
+  color: lightgrey;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.complete {
+  text-decoration: line-through;
+}
+
+.highlight {
+  color: #f9d53e;
+}
+
+.view-btn {
+  padding: 5px 20px;
+  margin: 5px;
+  border-radius: 26px 26px;
+  border: 1px solid white;
+  background-color: #0abab5;
+  font-weight: 100;
+  color: white;
+  outline: none;
 }

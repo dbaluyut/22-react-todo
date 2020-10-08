@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 const ADD_TODO = "todo/ADD_TODO"
 const DELETE_TODO = "todo/DELETE_TODO"
+const COMPLETE_TODO = "todo/COMPLETE_TODO"
 
 // 3. initial state
 const initialState = {
@@ -21,19 +22,31 @@ function generateId() {
 }
 // 4. reducer
 export default (state = initialState, action) => {
-  console.log("a", action)
   switch (action.type) {
     case ADD_TODO:
       return {
         ...state,
-        todos: [...state.todos, { id: generateId(), input: action.payload }],
+        todos: [
+          ...state.todos,
+          { id: generateId(), input: action.payload, complete: false },
+        ],
       }
 
     case DELETE_TODO:
-      console.log("triggered")
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
+      }
+
+    case COMPLETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === action.payload) {
+            todo.complete = !todo.complete
+          }
+          return todo
+        }),
       }
 
     default:
@@ -58,6 +71,23 @@ function deleteListItem(id) {
   }
 }
 
+function completeListItem(id) {
+  let complete = ADD_TODO.complete
+  if (complete === false) {
+    return {
+      complete: true,
+      type: COMPLETE_TODO,
+      payload: id,
+    }
+  } else {
+    return {
+      complete: false,
+      type: COMPLETE_TODO,
+      payload: id,
+    }
+  }
+}
+
 // 6. custom hook
 export function useTodo() {
   const dispatch = useDispatch()
@@ -66,9 +96,16 @@ export function useTodo() {
   const todos = useSelector((app) => app.todoState.todos)
   const addTodo = (input) => dispatch(addListItem(input))
   const deleteTodo = (id) => dispatch(deleteListItem(id))
+  const completedTodos = todos.filter((todo) => todo.complete === true)
+  const activeTodos = todos.filter((todo) => !todo.complete)
+  const completeTodo = (id) => dispatch(completeListItem(id))
+
   return {
     todos,
     deleteTodo,
     addTodo,
+    completedTodos,
+    completeTodo,
+    activeTodos,
   }
 }
