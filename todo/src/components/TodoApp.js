@@ -109,7 +109,7 @@ export default () => {
               completed
             </button>
           </div>
-          <button>clear completed</button>
+          <li>clear completed</li>
         </div>
       </div>
     </div>
